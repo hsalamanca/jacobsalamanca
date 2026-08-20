@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { venues } from "../data/site";
 
 export function Footer() {
@@ -10,7 +11,11 @@ export function Footer() {
       </div>
       <div className="footer__row">
         <p>Jacob Salamanca · Nightlife graphic design</p>
-        <a href="mailto:book@jacobsalamanca.com">book@jacobsalamanca.com</a>
+        <span>
+          <a href="mailto:book@jacobsalamanca.com">book@jacobsalamanca.com</a>
+          {" · "}
+          <Link to="/admin">Studio</Link>
+        </span>
       </div>
     </footer>
   );

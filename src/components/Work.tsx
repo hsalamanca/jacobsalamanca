@@ -1,16 +1,34 @@
 import { useEffect, useMemo, useState } from "react";
-import { posters } from "./Posters";
-import { type Category, type WorkItem, work } from "../data/site";
+import { WorkPoster } from "./Posters";
+import { work as fallbackWork } from "../data/site";
+import type { Category, WorkItem } from "../types";
 
 const filters: Category[] = ["All", "Club", "Bar", "Campaign"];
 
 export function Work() {
   const [filter, setFilter] = useState<Category>("All");
   const [active, setActive] = useState<WorkItem | null>(null);
+  const [work, setWork] = useState<WorkItem[]>(
+    fallbackWork.map((item, index) => ({
+      ...item,
+      posterStyle: item.id as WorkItem["posterStyle"],
+      published: true,
+      sortOrder: index,
+    })),
+  );
+
+  useEffect(() => {
+    fetch("/api/work")
+      .then((r) => r.json())
+      .then((d: { work?: WorkItem[] }) => {
+        if (Array.isArray(d.work) && d.work.length) setWork(d.work);
+      })
+      .catch(() => undefined);
+  }, []);
 
   const items = useMemo(
     () => (filter === "All" ? work : work.filter((w) => w.category === filter)),
-    [filter],
+    [filter, work],
   );
 
   useEffect(() => {
@@ -43,25 +61,22 @@ export function Work() {
         ))}
       </div>
       <div className="work__grid">
-        {items.map((item) => {
-          const Poster = posters[item.id as keyof typeof posters];
-          return (
-            <button
-              key={item.id}
-              type="button"
-              className="work__tile"
-              onClick={() => setActive(item)}
-            >
-              <Poster />
-              <span className="work__meta">
-                <strong>{item.title}</strong>
-                <em>
-                  {item.venue} · {item.category}
-                </em>
-              </span>
-            </button>
-          );
-        })}
+        {items.map((item) => (
+          <button
+            key={item.id}
+            type="button"
+            className="work__tile"
+            onClick={() => setActive(item)}
+          >
+            <WorkPoster item={item} />
+            <span className="work__meta">
+              <strong>{item.title}</strong>
+              <em>
+                {item.venue} · {item.category}
+              </em>
+            </span>
+          </button>
+        ))}
       </div>
 
       {active ? (
@@ -81,10 +96,7 @@ export function Work() {
               Close
             </button>
             <div className="lightbox__poster">
-              {(() => {
-                const Poster = posters[active.id as keyof typeof posters];
-                return <Poster />;
-              })()}
+              <WorkPoster item={active} />
             </div>
             <div className="lightbox__copy">
               <p className="eyebrow">

@@ -1,6 +1,6 @@
 export type Category = "All" | "Club" | "Bar" | "Campaign";
 
-export type WorkItem = {
+export type WorkSeed = {
   id: string;
   title: string;
   venue: string;
@@ -13,7 +13,7 @@ export type WorkItem = {
   brief: string;
 };
 
-export const work: WorkItem[] = [
+export const work: WorkSeed[] = [
   {
     id: "afterhours",
     title: "After / Hours",

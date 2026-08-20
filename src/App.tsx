@@ -1,30 +1,25 @@
-import { About } from "./components/About";
-import { Contact } from "./components/Contact";
-import { Footer } from "./components/Footer";
-import { Hero } from "./components/Hero";
-import { Marquee } from "./components/Marquee";
-import { Nav } from "./components/Nav";
-import { Process } from "./components/Process";
-import { Services } from "./components/Services";
-import { Work } from "./components/Work";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { AdminApp } from "./admin/AdminApp";
+import { Customers } from "./admin/Customers";
+import { Funnel } from "./admin/Funnel";
+import { Marketing } from "./admin/Marketing";
+import { Overview } from "./admin/Overview";
+import { WorkManager } from "./admin/WorkManager";
+import { PublicSite } from "./PublicSite";
 
 export default function App() {
   return (
-    <>
-      <a className="skip" href="#work">
-        Skip to work
-      </a>
-      <Nav />
-      <main>
-        <Hero />
-        <Marquee />
-        <Work />
-        <Services />
-        <Process />
-        <About />
-        <Contact />
-      </main>
-      <Footer />
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<PublicSite />} />
+        <Route path="/admin" element={<AdminApp />}>
+          <Route index element={<Overview />} />
+          <Route path="funnel" element={<Funnel />} />
+          <Route path="customers" element={<Customers />} />
+          <Route path="work" element={<WorkManager />} />
+          <Route path="marketing" element={<Marketing />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }

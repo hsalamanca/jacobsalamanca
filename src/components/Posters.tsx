@@ -145,3 +145,42 @@ export const posters = {
   happyhour: HappyHourPoster,
   nye: NyePoster,
 } as const;
+
+const styleClass: Record<string, string> = {
+  afterhours: "poster-after",
+  goldroom: "poster-gold",
+  azul: "poster-azul",
+  roof: "poster-roof",
+  bunker: "poster-bunker",
+  pool: "poster-pool",
+  happyhour: "poster-hh",
+  nye: "poster-nye",
+};
+
+export function WorkPoster({
+  item,
+}: {
+  item: {
+    id: string;
+    posterStyle: string;
+    title: string;
+    venue: string;
+    date: string;
+    city: string;
+    category: string;
+  };
+}) {
+  const Template = posters[item.id as keyof typeof posters];
+  if (Template && item.posterStyle === item.id) return <Template />;
+  return (
+    <article className={`poster ${styleClass[item.posterStyle] ?? "poster-hh"}`}>
+      <p className="poster-kicker">
+        {item.city} · {item.category}
+      </p>
+      <h3>{item.title || "UNTITLED"}</h3>
+      <p className="poster-foot">
+        {item.date} · {item.venue}
+      </p>
+    </article>
+  );
+}

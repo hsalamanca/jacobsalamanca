@@ -1,4 +1,5 @@
 import { type FormEvent, useState } from "react";
+import { api } from "../lib/api";
 
 const needs = [
   "Club / bar flyer",
@@ -10,21 +11,29 @@ const needs = [
 
 export function Contact() {
   const [sent, setSent] = useState(false);
+  const [error, setError] = useState("");
 
-  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setError("");
     const data = new FormData(e.currentTarget);
-    const name = String(data.get("name") ?? "");
-    const venue = String(data.get("venue") ?? "");
-    const date = String(data.get("date") ?? "");
-    const need = String(data.get("need") ?? "");
-    const message = String(data.get("message") ?? "");
-    const subject = encodeURIComponent(`Night booking — ${venue || name}`);
-    const body = encodeURIComponent(
-      `Name: ${name}\nVenue / brand: ${venue}\nEvent date: ${date}\nNeed: ${need}\n\n${message}`,
-    );
-    window.location.href = `mailto:book@jacobsalamanca.com?subject=${subject}&body=${body}`;
-    setSent(true);
+    try {
+      await api("/api/leads", {
+        method: "POST",
+        body: JSON.stringify({
+          name: data.get("name"),
+          email: data.get("email"),
+          phone: data.get("phone"),
+          venue: data.get("venue"),
+          date: data.get("date"),
+          need: data.get("need"),
+          message: data.get("message"),
+        }),
+      });
+      setSent(true);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Could not send the brief.");
+    }
   };
 
   return (
@@ -39,9 +48,8 @@ export function Contact() {
       </header>
       {sent ? (
         <p className="contact__thanks">
-          Your mail client should be open. If it isn't, write{" "}
-          <a href="mailto:book@jacobsalamanca.com">book@jacobsalamanca.com</a>
-          .
+          Brief received. It is on the board — you'll get a reply on how this
+          night should be built.
         </p>
       ) : (
         <form className="form" onSubmit={onSubmit}>
@@ -50,8 +58,16 @@ export function Contact() {
             <input name="name" type="text" required autoComplete="name" />
           </label>
           <label>
+            Email
+            <input name="email" type="email" required autoComplete="email" />
+          </label>
+          <label>
             Venue / brand
             <input name="venue" type="text" required />
+          </label>
+          <label>
+            Phone
+            <input name="phone" type="tel" autoComplete="tel" />
           </label>
           <label>
             Event date
@@ -74,6 +90,7 @@ export function Contact() {
               required
             />
           </label>
+          {error ? <p className="form__full" style={{ color: "var(--hot)" }}>{error}</p> : null}
           <button className="btn btn--hot" type="submit">
             Send the brief
           </button>
