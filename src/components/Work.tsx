@@ -68,7 +68,9 @@ export function Work() {
             className="work__tile"
             onClick={() => setActive(item)}
           >
-            <WorkPoster item={item} />
+            <span className="paper work__poster">
+              <WorkPoster item={item} />
+            </span>
             <span className="work__meta">
               <strong>{item.title}</strong>
               <em>
@@ -95,7 +97,7 @@ export function Work() {
             >
               Close
             </button>
-            <div className="lightbox__poster">
+            <div className="paper lightbox__paper">
               <WorkPoster item={active} />
             </div>
             <div className="lightbox__copy">
@@ -111,7 +113,7 @@ export function Work() {
                 ))}
               </ul>
               <p className="lightbox__result">{active.result}</p>
-              <a className="btn btn--hot" href="#book" onClick={() => setActive(null)}>
+              <a className="btn btn--ticket" href="#book" onClick={() => setActive(null)}>
                 I need this for my night
               </a>
             </div>

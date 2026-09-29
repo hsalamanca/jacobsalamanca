@@ -38,14 +38,16 @@ export function Contact() {
 
   return (
     <section className="section contact" id="book">
-      <header className="section__head">
-        <p className="eyebrow">Book a night</p>
-        <h2>Need a flyer before Friday?</h2>
-        <p className="section__intro">
-          Send the date, the room, and the music. I'll tell you what the drop
-          should include — flyer only, or the full campaign.
-        </p>
-      </header>
+      <div className="invite">
+        <div className="invite__intro">
+          <p className="eyebrow">Private booking</p>
+          <h2>Need a flyer before Friday?</h2>
+          <p className="section__intro">
+            Send the date, the room, and the music. You’ll get a reply on
+            whether the night needs a flyer or the full campaign.
+          </p>
+        </div>
+        <div className="invite__form">
       {sent ? (
         <p className="contact__thanks">
           Brief received. It is on the board — you'll get a reply on how this
@@ -91,11 +93,13 @@ export function Contact() {
             />
           </label>
           {error ? <p className="form__full" style={{ color: "var(--hot)" }}>{error}</p> : null}
-          <button className="btn btn--hot" type="submit">
+          <button className="btn btn--ticket" type="submit">
             Send the brief
           </button>
         </form>
       )}
+        </div>
+      </div>
     </section>
   );
 }

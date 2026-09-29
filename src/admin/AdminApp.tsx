@@ -24,7 +24,7 @@ export function AdminApp() {
     <div className="studio">
       <div className="studio-shell">
         <aside className="studio-side">
-          <strong>Jacob Salamanca</strong>
+          <strong>Salamnca Graphx</strong>
           {links.map((link) => (
             <NavLink
               key={link.to}

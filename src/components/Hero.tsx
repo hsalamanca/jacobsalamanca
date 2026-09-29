@@ -1,22 +1,21 @@
-import { AfterHoursPoster, AzulPoster, GoldRoomPoster } from "./Posters";
+import { AfterHoursPoster } from "./Posters";
 
 export function Hero() {
   return (
     <section className="hero" id="top">
-      <div className="hero__copy">
-        <p className="eyebrow">Graphic design · Nightlife marketing</p>
+      <div className="hero__sheet">
+        <p className="eyebrow">Nightlife graphic design</p>
         <h1>
-          Flyers that
-          <br />
-          fill the room.
+          <em>Salamnca</em>
+          <span>Graphx</span>
         </h1>
+        <p className="hero__banner">Flyers that fill the room.</p>
         <p className="lede">
-          Jacob Salamanca designs for clubs, bars, and promoters who need people
-          at the door — not just a pretty square on Instagram. Campaigns built
-          for Saturday night.
+          A studio for clubs, bars, and promoters. The work is built to be
+          shared, recognized, and walked into — print, stories, and the door.
         </p>
         <div className="hero__actions">
-          <a className="btn btn--hot" href="#book">
+          <a className="btn btn--ticket" href="#book">
             Book this week
           </a>
           <a className="btn btn--ghost" href="#work">
@@ -33,21 +32,18 @@ export function Hero() {
             <dd>40+</dd>
           </div>
           <div>
-            <dt>Typical turnaround</dt>
+            <dt>Turnaround</dt>
             <dd>48 hrs</dd>
           </div>
         </dl>
       </div>
-      <div className="hero__stack" aria-hidden="true">
-        <div className="hero__card hero__card--a">
+      <div className="hero__art">
+        <div className="paper paper--hero">
           <AfterHoursPoster />
         </div>
-        <div className="hero__card hero__card--b">
-          <GoldRoomPoster />
-        </div>
-        <div className="hero__card hero__card--c">
-          <AzulPoster />
-        </div>
+        <p className="hero__art-cap">
+          <span>01</span> After / Hours · Warehouse 12
+        </p>
       </div>
     </section>
   );

@@ -10,12 +10,12 @@ import { Work } from "./components/Work";
 
 export function PublicSite() {
   return (
-    <>
+    <div className="site-public">
       <a className="skip" href="#work">
         Skip to work
       </a>
       <Nav />
-      <main>
+      <main className="sheet">
         <Hero />
         <Marquee />
         <Work />
@@ -25,6 +25,6 @@ export function PublicSite() {
         <Contact />
       </main>
       <Footer />
-    </>
+    </div>
   );
 }

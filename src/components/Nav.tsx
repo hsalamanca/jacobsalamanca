@@ -23,7 +23,8 @@ export function Nav() {
   return (
     <header className={`nav ${scrolled ? "nav--scrolled" : ""}`}>
       <a className="nav__logo" href="#top">
-        Jacob Salamanca
+        <span>SG</span>
+        Salamnca Graphx
       </a>
       <nav className="nav__links" aria-label="Primary">
         <a href="#work">Work</a>

@@ -4,9 +4,9 @@ export function About() {
       <div className="about__grid">
         <div>
           <p className="eyebrow">The studio</p>
-          <h2>A graphic designer who understands the door.</h2>
+          <h2>A studio that understands the door.</h2>
           <p>
-            Jacob Salamanca is a graphic designer working almost exclusively
+            Salamnca Graphx is a graphic design studio working almost exclusively
             with nightlife — clubs, bars, day parties, and the promoters who
             run them. The work sits between poster culture and performance
             marketing: it has to look like a night worth leaving the house

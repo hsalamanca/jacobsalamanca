@@ -22,7 +22,7 @@ export function Login() {
   return (
     <div className="studio-login">
       <form onSubmit={onSubmit}>
-        <p className="studio-kicker">Studio</p>
+        <p className="studio-kicker">Salamnca Graphx</p>
         <h1>Night desk</h1>
         <p className="muted">
           Pipeline, customers, published work, and campaign drops.
