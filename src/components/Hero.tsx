@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { AfterHoursPoster } from "./Posters";
 
 export function Hero() {
@@ -38,12 +39,14 @@ export function Hero() {
         </dl>
       </div>
       <div className="hero__art">
-        <div className="paper paper--hero">
-          <AfterHoursPoster />
-        </div>
-        <p className="hero__art-cap">
-          <span>01</span> After / Hours · Warehouse 12
-        </p>
+        <Link className="hero__art-link" to="/after-hours">
+          <div className="paper paper--hero">
+            <AfterHoursPoster />
+          </div>
+          <p className="hero__art-cap">
+            <span>01</span> After / Hours · Warehouse 12
+          </p>
+        </Link>
       </div>
     </section>
   );

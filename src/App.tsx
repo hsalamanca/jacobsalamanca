@@ -5,6 +5,7 @@ import { Funnel } from "./admin/Funnel";
 import { Marketing } from "./admin/Marketing";
 import { Overview } from "./admin/Overview";
 import { WorkManager } from "./admin/WorkManager";
+import { AfterHoursPage } from "./pages/AfterHours";
 import { PublicSite } from "./PublicSite";
 
 export default function App() {
@@ -12,6 +13,7 @@ export default function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<PublicSite />} />
+        <Route path="/after-hours" element={<AfterHoursPage />} />
         <Route path="/admin" element={<AdminApp />}>
           <Route index element={<Overview />} />
           <Route path="funnel" element={<Funnel />} />

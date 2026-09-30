@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { WorkPoster } from "./Posters";
 import { work as fallbackWork } from "../data/site";
 import type { Category, WorkItem } from "../types";
@@ -6,6 +7,7 @@ import type { Category, WorkItem } from "../types";
 const filters: Category[] = ["All", "Club", "Bar", "Campaign"];
 
 export function Work() {
+  const navigate = useNavigate();
   const [filter, setFilter] = useState<Category>("All");
   const [active, setActive] = useState<WorkItem | null>(null);
   const [work, setWork] = useState<WorkItem[]>(
@@ -66,7 +68,13 @@ export function Work() {
             key={item.id}
             type="button"
             className="work__tile"
-            onClick={() => setActive(item)}
+            onClick={() => {
+              if (item.id === "afterhours") {
+                navigate("/after-hours");
+                return;
+              }
+              setActive(item);
+            }}
           >
             <span className="paper work__poster">
               <WorkPoster item={item} />
